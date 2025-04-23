@@ -30,3 +30,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Security\OAuthUserProvider:
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+            $userRepository: '@App\Repository\UserRepository'
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    app.user_provider.oauth:
+        alias: App\Security\OAuthUserProvider
+

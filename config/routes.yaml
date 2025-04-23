@@ -17,3 +17,8 @@ controllers:
     prefix: /{_locale}
     defaults:
         _locale: '%app.locale%'
+
+hwi_oauth_login_check:
+    path: /login/check-google
+    defaults:
+        _controller: HWI\Bundle\OAuthBundle\Controller\RedirectController::connectCheckAction

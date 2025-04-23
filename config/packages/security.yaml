@@ -39,6 +39,17 @@ security:
                 # session (for example when the users access directly to the login page).
                 default_target_path: blog_index
 
+            oauth:
+                resource_owners:
+                    google: "/login/check-google"
+                login_path: /login
+                check_path: /login/check-google
+                use_forward: false
+                failure_path: /login
+                default_target_path: /en/admin/post
+                oauth_user_provider:
+                    service: app.user_provider.oauth               
+
             # This option allows users to choose to stay logged in for longer than
             # the session lasts using a cookie. Reference: https://symfony.com/doc/current/security/remember_me.html
             remember_me:
