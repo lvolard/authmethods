@@ -49,66 +49,12 @@
         </div>
 
         <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google'}) }}">
-            Login with Google
+                <img 
+                    src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+                    alt="Login with Google"
+                    style="height: 40px;"
+                />
         </a>
-
-        <div id="login-help" class="col-sm-7">
-            <h3>
-                <twig:ux:icon name="tabler:arrow-left"/>
-                {{ 'help.login_users'|trans }}
-            </h3>
-
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ 'label.username'|trans }}</th>
-                        <th scope="col">{{ 'label.password'|trans }}</th>
-                        <th scope="col">{{ 'label.role'|trans }}</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>john_user</td>
-                        <td>kitten</td>
-                        <td><code>ROLE_USER</code> ({{ 'help.role_user'|trans }})</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" {{ stimulus_action('login', 'prefillJohnUser') }}>
-                                <twig:ux:icon name="tabler:user" aria-hidden="false" aria-label="Log in as the user John"/>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>jane_admin</td>
-                        <td>kitten</td>
-                        <td><code>ROLE_ADMIN</code> ({{ 'help.role_admin'|trans }})</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" {{ stimulus_action('login', 'prefillJaneAdmin') }}>
-                                <twig:ux:icon name="tabler:user" aria-hidden="false" aria-label="Log in as the user Jane"/>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div id="login-users-help" class="card">
-                <div class="card-body">
-                    <p>
-                        <span class="badge badge-success">{{ 'note'|trans }}</span>
-                        {{ 'help.reload_fixtures'|trans }}<br/>
-
-                        <code class="console">$ php bin/console doctrine:fixtures:load</code>
-                    </p>
-
-                    <p>
-                        <span class="badge badge-success">{{ 'tip'|trans }}</span>
-                        {{ 'help.add_user'|trans }}<br/>
-
-                        <code class="console">$ php bin/console app:add-user</code>
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}
 

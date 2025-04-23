@@ -6,7 +6,7 @@ hwi_oauth:
             type:                google
             client_id:           '%env(GOOGLE_ID)%'
             client_secret:       '%env(GOOGLE_SECRET)%'
-            redirect_uri:        https://psychic-garbanzo-w5qwrwr969qf5pqr-8000.app.github.dev/login/check-google #http://localhost:8000/login/check-google 
+            redirect_uri:        https://psychic-garbanzo-w5qwrwr969qf5pqr-8000.app.github.dev/login/check-google
             scope:               "email profile"
 
     target_path_parameter: _target_path
