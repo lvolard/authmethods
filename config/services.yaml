@@ -46,3 +46,10 @@ services:
     App\Service\OpenWeatherService:
         arguments:
             $apiKey: '%openweather.api_key%'
+
+    App\Security\AccessDeniedHandler:
+        arguments:
+            $router: '@router'
+            $requestStack: '@request_stack'
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }

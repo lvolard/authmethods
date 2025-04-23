@@ -36,7 +36,6 @@ class OAuthUserProvider implements OAuthAwareUserProviderInterface
 
             // Password isn't used for OAuth users, set something safe
             $user->setPassword('oauth-google-no-password');
-            $user->setRoles([User::ROLE_ADMIN]); // or [User::ROLE_USER, User::ROLE_ADMIN]
 
             $this->em->persist($user);
             $this->em->flush();

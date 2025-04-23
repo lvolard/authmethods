@@ -90,6 +90,23 @@
 
         <div class="container body-container">
             {% block body %}
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert 
+                            {% if label == 'error' or label == 'danger' %}
+                                alert-danger
+                            {% elseif label == 'success' %}
+                                alert-success
+                            {% elseif label == 'warning' %}
+                                alert-warning
+                            {% else %}
+                                alert-info
+                            {% endif %}
+                        ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
                 <div class="row">
                     <div id="main" class="col-sm-9">
                         {{ include('default/_flash_messages.html.twig') }}
