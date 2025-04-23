@@ -1,88 +1,53 @@
-Symfony Demo Application
-========================
+# Projet Final – Méthodes d’Authentification  
+### IC3 S2 – Efrei 2024/2025  
+### Groupe : Mathéo Lecoeur, Louis Volard, Gautier MERCAT, Arthur LAVERAN
+### Repository forké depuis : [https://github.com/amdouni/authmethods](https://github.com/amdouni/authmethods)
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
+## 🔐 1. Connexion sécurisée à GitHub & réparation erreurs de lancement 
 
-You can also learn about these practices in [the official Symfony Book][5].
+- Utilisation de **code space** pour se connecter au repository forké.
+- Connexion sécurisée via compte GitHub et clé SSH automatiquement gérée par code space.
+- Commit et push réalisés depuis code space avec succès.
+- vérification de npm, composer sont install. Nétant pas le cas, on les à installer 
+- Creation de fichier $web-font-path avec https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap 
 
-Requirements
-------------
+### 🔑 Authentification via google (OAuth2)
 
-  * PHP 8.2.0 or higher;
-  * PDO-SQLite PHP extension enabled;
-  * and the [usual Symfony application requirements][2].
+- Instauration API google oAuth
 
-Installation
-------------
+- Resolution d'une erreur d'acces a l'application car code space a changer le port sans prévenir. IL à alors fallut modifier les api google
+---
+- Création d'un espace https://console.cloud.google.com/ et création d'un client d'authentification. Récupération de la clef et du secret
+- Modification de la page de login : retrait du tableau avec les mots de passe et ajout du bouton de connection google
+- Création des routes pour acceder jusqu'au service google (./connect/google) puis pour le retour des données depuis google (./login/check-google)
+- Implémentation d'un **service Symfony** pour récupérer les données google et la vérification de la connection
+- Implémentation d'un **service Symfony** pour la gestion des erreurs d'enregistrement avec messages d'erreur sur la page principale
+- Hachage du secret google pour plus de sécurité
 
-There are 3 different ways of installing this project depending on your needs:
+## 🌤 3. Intégration de l’API OpenWeatherMap – Nouvelle page météo
 
-**Option 1.** [Download Symfony CLI][4] and use the `symfony` binary installed
-on your computer to run this command:
+- Création d’un compte sur [OpenWeatherMap.org](https://openweathermap.org) et génération d’une API Key.
+- Implémentation d’un **service Symfony** pour se connecter à l’API météo.
+- Creation d'une page d'appel API 
+- Creation d'une clé de service Yaml 
+- Creation d'une page de template Twing
+- Affichage de la météo actuelle pour une ville définie (ex : Paris) :
+  - Température
+  - Conditions météo (ex. : Ensoleillé, Pluie)
+  - Icône illustrant la météo
 
-```bash
-symfony new --demo my_project
-```
 
-**Option 2.** [Download Composer][6] and use the `composer` binary installed
-on your computer to run these commands:
+## 🗂️ Principaux Fichiers modifiés / ajoutés
 
-```bash
-# you can create a new project based on the Symfony Demo project...
-composer create-project symfony/symfony-demo my_project
+- `.env.local` : stockage de différentes variables
+- `config/packages/security.yaml` : gestion des firewall et des routes pour permettre la communication avec l'API de connection google
+- `src/Controller/WeatherController.php` : nouvelle page météo
+- `src/Service/WeatherService.php` : communication avec l’API OpenWeatherMap
+- `templates/weather/index.html.twig` : page affichant la météo
+- `src/Security/OAuthUserProvider.php` : service d'authentification et de récupération des données de google
+- 'config/packages/hwi_oauth.yaml' :configuration de l’authentification OAuth2
+- `templates/security/login.html.twig` : modification de la page de login
+- ...
 
-# ...or you can clone the code repository and install its dependencies
-git clone https://github.com/symfony/demo.git my_project
-cd my_project/
-composer install
-```
+---
 
-**Option 3.** Click the following button to deploy this project on Platform.sh,
-the official Symfony PaaS, so you can try it without installing anything locally:
-
-<p align="center">
-<a href="https://console.platform.sh/projects/create-project?template=https://raw.githubusercontent.com/symfonycorp/platformsh-symfony-template-metadata/main/symfony-demo.template.yaml&utm_content=symfonycorp&utm_source=github&utm_medium=button&utm_campaign=deploy_on_platform"><img src="https://platform.sh/images/deploy/lg-blue.svg" alt="Deploy on Platform.sh" width="180px" /></a>
-</p>
-
-Usage
------
-
-There's no need to configure anything before running the application. There are
-2 different ways of running this application depending on your needs:
-
-**Option 1.** [Download Symfony CLI][4] and run this command:
-
-```bash
-cd my_project/
-symfony serve
-```
-
-Then access the application in your browser at the given URL (<https://localhost:8000> by default).
-
-**Option 2.** Use a web server like Nginx or Apache to run the application
-(read the documentation about [configuring a web server for Symfony][3]).
-
-On your local machine, you can run this command to use the built-in PHP web server:
-
-```bash
-cd my_project/
-php -S localhost:8000 -t public/
-```
-
-Tests
------
-
-Execute this command to run tests:
-
-```bash
-cd my_project/
-./bin/phpunit
-```
-
-[1]: https://symfony.com/doc/current/best_practices.html
-[2]: https://symfony.com/doc/current/setup.html#technical-requirements
-[3]: https://symfony.com/doc/current/setup/web_server_configuration.html
-[4]: https://symfony.com/download
-[5]: https://symfony.com/book
-[6]: https://getcomposer.org/
