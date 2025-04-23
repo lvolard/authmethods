@@ -6,6 +6,7 @@
 parameters:
     app.locale: 'en'
     app.notifications.email_sender: anonymous@example.com
+    openweather.api_key: '%env(OPENWEATHER_API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -42,3 +43,6 @@ services:
     app.user_provider.oauth:
         alias: App\Security\OAuthUserProvider
 
+    App\Service\OpenWeatherService:
+        arguments:
+            $apiKey: '%openweather.api_key%'

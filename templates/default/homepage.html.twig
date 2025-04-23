@@ -44,4 +44,16 @@
             </div>
         </div>
     </div>
+     <div class="col-sm">
+            <div class="jumbotron">
+                <p>
+                    Tu veux voir la météo à Paris ?
+                </p>
+                <p>
+                    <a class="btn btn-success btn-lg" href="{{ path('weather', { city: 'Paris' }) }}">
+                        🌤️ Voir la météo à Paris
+                    </a>
+                </p>
+            </div>
+        </div>
 {% endblock %}
